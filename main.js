@@ -14,20 +14,23 @@ const refs = {
   btnStop: document.querySelector('.btn-stop'),
   body: document.querySelector('body')
 }
-
+let setIntervalId;
  
 refs.btnStart.addEventListener('click', onClickStart)
-function onClickStart(event) {
+
+function onClickStart() {
   
-  const setIntervalId = setInterval(callBackForsetInterval, 1000)
-   console.log(event.target.disabled);
+
+  setIntervalId = setInterval(callBackForsetInterval, 1000)
    
-  refs.btnStop.addEventListener('click', onClickStop)
-function onClickStop(event) {
-  clearTimeout(setIntervalId)
-   console.log(event.target.disabled);
+   refs.btnStart.disabled = true
+
 }
 
+ refs.btnStop.addEventListener('click', onClickStop)
+function onClickStop(event) {
+  clearInterval(setIntervalId)
+  refs.btnStart.disabled = false
 }
 function callBackForsetInterval() {
   
